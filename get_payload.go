@@ -101,7 +101,7 @@ func GetChannelHeaderJson(channelHeader *common.ChannelHeader) (ChannelHeader, e
 		Name:    "",
 		Version: "",
 	}
-	if extension.ChaincodeId == nil {
+	if extension.ChaincodeId != nil {
 		chaincodeIdJson = ChaincodeID{
 			Path:    extension.ChaincodeId.Path,
 			Name:    extension.ChaincodeId.Name,
