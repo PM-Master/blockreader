@@ -36,15 +36,24 @@ func GetBlockData(block *common.Block) (BlockData, error) {
 	}
 
 	// Payload field is marshalled object of ChaincodeActionPayload
-	chaincodeActionPayload := &peer.ChaincodeActionPayload{}
-	err = proto.Unmarshal(transaction.Actions[0].Payload, chaincodeActionPayload)
-	if err != nil {
-		return BlockData{}, err
-	}
+	transactions := make([]Transaction, 0)
+	chaincodeActionPayloads := make([]*peer.ChaincodeActionPayload, 0)
+	for _, txAction := range transaction.Actions {
+		chaincodeActionPayload := &peer.ChaincodeActionPayload{}
 
-	transactionJson, err := GetTransactionJson(chaincodeActionPayload)
-	if err != nil {
-		return BlockData{}, err
+		err = proto.Unmarshal(txAction.Payload, chaincodeActionPayload)
+		if err != nil {
+			return BlockData{}, err
+		}
+
+		chaincodeActionPayloads = append(chaincodeActionPayloads, chaincodeActionPayload)
+
+		transactionJson, err := GetTransactionJson(chaincodeActionPayload)
+		if err != nil {
+			return BlockData{}, err
+		}
+
+		transactions = append(transactions, transactionJson)
 	}
 
 	blockDataJson := BlockData{
@@ -53,7 +62,7 @@ func GetBlockData(block *common.Block) (BlockData, error) {
 				Payload: payloadJson,
 			},
 			Data: Data{
-				Transaction: transactionJson,
+				Transactions: transactions,
 			},
 		},
 	}

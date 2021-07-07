@@ -97,9 +97,16 @@ func GetChannelHeaderJson(channelHeader *common.ChannelHeader) (ChannelHeader, e
 	}
 
 	chaincodeIdJson := ChaincodeID{
-		Path:    extension.ChaincodeId.Path,
-		Name:    extension.ChaincodeId.Name,
-		Version: extension.ChaincodeId.Version,
+		Path:    "",
+		Name:    "",
+		Version: "",
+	}
+	if extension.ChaincodeId == nil {
+		chaincodeIdJson = ChaincodeID{
+			Path:    extension.ChaincodeId.Path,
+			Name:    extension.ChaincodeId.Name,
+			Version: extension.ChaincodeId.Version,
+		}
 	}
 
 	chaincodeHeaderExtensionJson := ChaincodeHeaderExtension{

@@ -82,7 +82,7 @@ type Certificate struct {
 }
 
 type Data struct {
-	Transaction Transaction `json:"transaction"`
+	Transactions []Transaction `json:"transaction"`
 }
 
 type Transaction struct {
