@@ -1,6 +1,7 @@
-package main
+package blockreader
 
 import (
+	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	"time"
 )
 
@@ -121,10 +122,10 @@ type ChaincodeEvents struct {
 }
 
 type ChaincodeKVRWSet struct {
-	Reads            KVRead          `json:"reads"`
-	RangeQueriesInfo RangeQueryInfo  `json:"range_queries_info"`
-	Writes           KVWrite         `json:"writes"`
-	MetadataWrites   KVMetadataWrite `json:"metadata_writes"`
+	Reads            KVRead             `json:"reads"`
+	RangeQueriesInfo RangeQueryInfo     `json:"range_queries_info"`
+	Writes           []*kvrwset.KVWrite `json:"writes"`
+	MetadataWrites   KVMetadataWrite    `json:"metadata_writes"`
 }
 
 type KVRead struct {

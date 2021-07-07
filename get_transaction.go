@@ -1,4 +1,4 @@
-package main
+package blockreader
 
 import (
 	"crypto/sha256"

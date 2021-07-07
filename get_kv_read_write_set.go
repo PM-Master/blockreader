@@ -1,4 +1,4 @@
-package main
+package blockreader
 
 import (
 	"github.com/golang/protobuf/proto"
@@ -80,7 +80,6 @@ func GetKVRWSetJson(chaincodeAction *peer.ChaincodeAction) (ChaincodeKVRWSet, er
 
 	var versionJson Version
 	var kvReadJson KVRead
-	var kvWriteJson KVWrite
 	var rangeQueryInfoJson RangeQueryInfo
 	var kvMetadataWriteJson KVMetadataWrite
 
@@ -93,13 +92,6 @@ func GetKVRWSetJson(chaincodeAction *peer.ChaincodeAction) (ChaincodeKVRWSet, er
 		kvReadJson = KVRead{
 			Key:     kvrwset.Reads[0].Key,
 			Version: versionJson,
-		}
-	}
-
-	if len(kvrwset.Writes) != 0 {
-		kvWriteJson = KVWrite{
-			Key:      kvrwset.Writes[0].Key,
-			IsDelete: kvrwset.Writes[0].IsDelete,
 		}
 	}
 
@@ -121,7 +113,7 @@ func GetKVRWSetJson(chaincodeAction *peer.ChaincodeAction) (ChaincodeKVRWSet, er
 
 	chaincodeKVRWSetJson := ChaincodeKVRWSet{
 		Reads:            kvReadJson,
-		Writes:           kvWriteJson,
+		Writes:           kvrwset.Writes,
 		RangeQueriesInfo: rangeQueryInfoJson,
 		MetadataWrites:   kvMetadataWriteJson,
 	}

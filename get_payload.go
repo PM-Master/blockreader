@@ -1,4 +1,4 @@
-package main
+package blockreader
 
 import (
 	"crypto/x509"
@@ -95,7 +95,7 @@ func GetChannelHeaderJson(channelHeader *common.ChannelHeader) (ChannelHeader, e
 	if err != nil {
 		return ChannelHeader{}, errors.WithMessage(err, "unmarshaling Channel Header error: ")
 	}
-	
+
 	chaincodeIdJson := ChaincodeID{
 		Path:    extension.ChaincodeId.Path,
 		Name:    extension.ChaincodeId.Name,
