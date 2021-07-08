@@ -84,7 +84,7 @@ func GetChainCodeProposalPayload(chaincodeActionPayload *peer.ChaincodeActionPay
 			Decorations map[string][]byte
 		}
 	*/
-	if input.ChaincodeSpec == nil {
+	if input.ChaincodeSpec == nil || input.ChaincodeSpec.Input == nil {
 		return ChaincodeProposalPayload{
 			ChaincodeInvocationSpec: ChaincodeInvocationSpec{
 				ChaincodeSpec: ChaincodeSpec{
