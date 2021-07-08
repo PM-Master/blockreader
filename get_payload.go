@@ -153,7 +153,17 @@ func GetSignatureHeaderJson(signatureHeader *common.SignatureHeader) (SignatureH
 		return SignatureHeader{}, errors.WithMessage(err, "Error decoding string: ")
 	}
 
-	end, _ := pem.Decode([]byte(string(certHash)))
+	if len(certHash) == 0 {
+		return SignatureHeader{
+			Creator: Creator{
+				Mspid:       creator.Mspid,
+				CertHash:    string(certHash),
+				Certificate: Certificate{},
+			},
+		}, nil
+	}
+
+	end, _ := pem.Decode(certHash)
 	if end == nil {
 		return SignatureHeader{}, errors.New("Error Pem decoding: ")
 	}
