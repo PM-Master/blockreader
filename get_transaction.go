@@ -84,6 +84,17 @@ func GetChainCodeProposalPayload(chaincodeActionPayload *peer.ChaincodeActionPay
 			Decorations map[string][]byte
 		}
 	*/
+	if input.ChaincodeSpec == nil {
+		return ChaincodeProposalPayload{
+			ChaincodeInvocationSpec: ChaincodeInvocationSpec{
+				ChaincodeSpec: ChaincodeSpec{
+					ChaincodeId:   "",
+					ChaincodeType: "",
+					ChaincodeArgs: []string{},
+				},
+			},
+		}, nil
+	}
 
 	chaincodeArgs := make([]string, len(input.ChaincodeSpec.Input.Args))
 
