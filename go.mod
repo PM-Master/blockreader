@@ -3,7 +3,7 @@ module github.com/PM-Master/blockreader
 go 1.16
 
 require (
-	github.com/golang/protobuf v1.5.0
+	github.com/golang/protobuf v1.3.3
 	github.com/hyperledger/fabric-protos-go v0.0.0-20210318103044-13fdee960194
 	github.com/pkg/errors v0.9.1
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980 // indirect
@@ -12,4 +12,4 @@ require (
 	google.golang.org/grpc v1.29.1 // indirect
 )
 
-replace github.com/hyperledger/fabric-protos-go =>  github.com/PM-Master/fabric-protos-go v0.0.0-20210723052030-20fa23932820
+replace github.com/hyperledger/fabric-protos-go => github.com/PM-Master/fabric-protos-go v0.0.0-20210723052030-20fa23932820
